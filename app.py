@@ -3,7 +3,7 @@ from flask_cors import CORS
 from methods.player import get_player_stats
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins=['http://localhost:3000'])
 
 @app.route('/api', methods=['POST'])
 def player_stats():
