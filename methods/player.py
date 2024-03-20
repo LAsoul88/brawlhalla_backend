@@ -13,10 +13,8 @@ class BrawlhallaAPI:
     match self.endpoint:
       case 'legend':
         return self.__get_legends()
-      case 'ranked':
-        return self.__get_player_ranked()
       case 'stats':
-        return self.__get_player_stats()
+        return {'stats': self.__get_player_stats(), 'ranked': self.__get_player_ranked()}
 
   def __get_legends(self):
     response = requests.get(f'https://api.brawlhalla.com/legend/all?api_key={os.getenv("API_KEY")}')
