@@ -23,6 +23,8 @@ class BrawlhallaAPI:
           'brawlhalla_id': self.player_id,
         }
         return {'player': player, 'stats': stats, 'ranked': ranked}
+      case 'leaderboard':
+        return self.__get_leaderboard()
 
   def __get_legends(self):
     response = requests.get(f'https://api.brawlhalla.com/legend/all?api_key={os.getenv("API_KEY")}').json()
@@ -34,4 +36,8 @@ class BrawlhallaAPI:
 
   def __get_player_stats(self):
     response = requests.get(f'https://api.brawlhalla.com/player/{self.player_id}/stats?api_key={os.getenv("API_KEY")}').json()
+    return response
+  
+  def __get_leaderboard(self):
+    response = requests.get(f'https://api.brawlhalla.com/rankings/1v1/all/1?api_key={os.getenv("API_KEY")}').json()
     return response
