@@ -1,6 +1,6 @@
 from flask import Flask, request
 from flask_cors import CORS
-from methods.player import BrawlhallaAPI
+from methods.player import Proxy
 
 app = Flask(__name__)
 CORS(app, origins=['http://localhost:3000'])
@@ -10,5 +10,7 @@ def brawlhalla_api():
 
   if request.method == 'POST':
     data = request.get_json()
-    comms = BrawlhallaAPI(data['endpoint'], data['player_id'])
+    comms = Proxy()
+    comms.unpack(data)
+    print(comms.endpoint)
     return comms.direct_call()
